@@ -22,17 +22,39 @@ static volatile uint32_t Software_ComputedCRC;
 int main(void) {
 	
 	// Switch System Clock = 80 MHz
-	System_Clock_Init(); 
+	System_Clock_Init();
+	SysTick_Init();
+	LED_Init();
+	UART2_Init();
+	UART2_GPIO_Init();
+	USART_Init(USART2);
+
 	// TODO initialize modules
-	
+		printf("Hello world");
 	while(1) {
-		LED_Toggle();
+		uint32_t tim = 0;
+		LED_On();
 		// initialize CRC
+		uint32_t crc = INITIAL_CRC_VALUE;
 		// start timer
+		startTimer();
 		// compute CRC
-		// end timer
+		for (int i = 0; i < BUFFER_SIZE; i++) {
+			crc = CrcSoftwareFunc(crc,DataBuffer[i],POLYNOME);
+			
 		// check CRC
+
+		
+		}
+		// end timer
+		tim = endTimer();
+		if (crc != uwExpectedCRCValue) {
+			LED_Off();
+			break;
+		}
 		// print time
+		printf("%d \n" , tim);
 		// delay
+		delay(1000);
 	}
 }

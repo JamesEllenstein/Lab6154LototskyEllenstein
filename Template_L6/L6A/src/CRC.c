@@ -14,18 +14,21 @@
   * @param  Data: specifies the input data
   * @retval Crc: the CRC result of the input data
   */
-
 uint32_t CrcSoftwareFunc(uint32_t Initial_Crc, uint32_t Input_Data, uint32_t POLY)
 {
   uint8_t bindex = 0;
-  uint32_t Crc = 0;
-
-  /* Initial XOR operation with the previous Crc value */
-	//TODO
-
-  /* The CRC algorithm routine */
-  //TODO
-	
-  return Crc;
+  uint32_t Crc = Initial_Crc ^ Input_Data;
+	while (1) {
+		if ((Crc & 1UL << 31) == 1UL << 31) {
+			Crc = (Crc << 1) ^ POLY;
+		} else {
+			Crc = Crc << 1;
+		}
+		bindex += 1;
+		if (bindex >= sizeof(Input_Data) * 8) {
+			break;
+		}
+	}
+	return Crc;
 }
 

@@ -8,7 +8,7 @@
 
 #include "SysTimer.h"
 
-static uint32_t volatile step;
+static volatile uint32_t msTicks;
 
 void SysTick_Init(void) {
 	// SysTick Control & Status Register
@@ -30,19 +30,31 @@ void SysTick_Init(void) {
 	NVIC_SetPriority(SysTick_IRQn, 1); // Set Priority to 1
 }
 
-void SysTick_Handler(void) {
-	//TODO
+void SysTick_Handler(void){
+	++msTicks;
 }
-
-void delay(uint32_t ms) {
-	//TODO
+	
+//******************************************************************************************
+// Delay in ms
+//******************************************************************************************
+void delay (uint32_t T){
+	msTicks = 0;
+	SysTick->VAL = 0;
+	SysTick->LOAD = 79999;
+	SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
+	while (msTicks < T) {}
+	SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;
 }
 
 void startTimer(void) {
-	//TODO
+	msTicks = 0;
+	SysTick->VAL = 0;
+	SysTick->LOAD = 79999;
+	SysTick->CTRL |= SysTick_CTRL_ENABLE_Msk;
 }
 
 uint32_t endTimer(void) {
-	//TODO
-	return 0;
+	SysTick->CTRL &= ~SysTick_CTRL_ENABLE_Msk;	
+	return (79999 - SysTick->VAL) / 80 + 1000 * msTicks;
 }
+
