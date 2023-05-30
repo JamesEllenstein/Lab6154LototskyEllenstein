@@ -30,10 +30,9 @@ int main(void) {
 	USART_Init(USART2);
 
 	// TODO initialize modules
-		printf("Hello world");
 	while(1) {
 		uint32_t tim = 0;
-		LED_On();
+		LED_Toggle();
 		// initialize CRC
 		uint32_t crc = INITIAL_CRC_VALUE;
 		// start timer

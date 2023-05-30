@@ -24,6 +24,7 @@ void SysTick_Init(void) {
 	// If CLKSOURCE = 0, the external clock is used. The frequency of SysTick clock is the frequency of the AHB clock divided by 8.
 	// If CLKSOURCE = 1, the processor clock is used.
 	// TODO
+	SysTick->CTRL |= SysTick_CTRL_CLKSOURCE_Msk;
 	
 	// Configure and Enable SysTick interrupt in NVIC
 	NVIC_EnableIRQ(SysTick_IRQn);

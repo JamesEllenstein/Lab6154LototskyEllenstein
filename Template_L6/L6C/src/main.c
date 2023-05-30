@@ -37,7 +37,7 @@ int main(void) {
 	USART_Init(USART2);
 	DMA_Init();
 	while(1) {
-		LED_On();
+		LED_Toggle();
 		startTimer();
 		ComputationDone = 0;
 		CRC->CR |= CRC_CR_RESET;

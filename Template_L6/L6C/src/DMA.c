@@ -39,7 +39,7 @@ void DMA_Init(void) {
 }
 
 void DMA1_Channel6_IRQHandler(void){
-	NVIC_ClearPendingIRQ(DMA1_Channel6_IRQn);	
+ 	NVIC_ClearPendingIRQ(DMA1_Channel6_IRQn);	
 	if ((DMA1->ISR & DMA_ISR_TCIF6) == DMA_ISR_TCIF6) {
 		DMA1->IFCR |= DMA_IFCR_CTCIF6;
 	}

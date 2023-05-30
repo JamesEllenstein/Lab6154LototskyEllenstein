@@ -11,7 +11,7 @@ Section Cross References
     main.o(.text.main) refers to uart.o(.text.UART2_GPIO_Init) for UART2_GPIO_Init
     main.o(.text.main) refers to uart.o(.text.UART2_Init) for UART2_Init
     main.o(.text.main) refers to uart.o(.text.USART_Init) for USART_Init
-    main.o(.text.main) refers to led.o(.text.LED_On) for LED_On
+    main.o(.text.main) refers to led.o(.text.LED_Toggle) for LED_Toggle
     main.o(.text.main) refers to systimer.o(.text.startTimer) for startTimer
     main.o(.text.main) refers to data.o(.rodata.DataBuffer) for DataBuffer
     main.o(.text.main) refers to crc.o(.text.CRC_CalcBlockCRC) for CRC_CalcBlockCRC
@@ -392,8 +392,8 @@ Removing Unused input sections from the image.
     Removing led.o(.text), (0 bytes).
     Removing led.o(.ARM.exidx.text.LED_Init), (8 bytes).
     Removing led.o(.ARM.exidx.text.LED_Off), (8 bytes).
+    Removing led.o(.text.LED_On), (16 bytes).
     Removing led.o(.ARM.exidx.text.LED_On), (8 bytes).
-    Removing led.o(.text.LED_Toggle), (16 bytes).
     Removing led.o(.ARM.exidx.text.LED_Toggle), (8 bytes).
     Removing sysclock.o(.text), (0 bytes).
     Removing sysclock.o(.ARM.exidx.text.System_Clock_Init), (8 bytes).
@@ -698,7 +698,7 @@ Image Symbol Table
     [Anonymous Symbol]                       0x080014c4   Section        0  crc.o(.text.CRC_Init)
     [Anonymous Symbol]                       0x08001508   Section        0  led.o(.text.LED_Init)
     [Anonymous Symbol]                       0x08001550   Section        0  led.o(.text.LED_Off)
-    [Anonymous Symbol]                       0x08001560   Section        0  led.o(.text.LED_On)
+    [Anonymous Symbol]                       0x08001560   Section        0  led.o(.text.LED_Toggle)
     [Anonymous Symbol]                       0x08001570   Section        0  systimer.o(.text.SysTick_Handler)
     [Anonymous Symbol]                       0x08001580   Section        0  systimer.o(.text.SysTick_Init)
     [Anonymous Symbol]                       0x080015d0   Section        0  sysclock.o(.text.System_Clock_Init)
@@ -1046,7 +1046,7 @@ Image Symbol Table
     CRC_Init                                 0x080014c5   Thumb Code    66  crc.o(.text.CRC_Init)
     LED_Init                                 0x08001509   Thumb Code    72  led.o(.text.LED_Init)
     LED_Off                                  0x08001551   Thumb Code    16  led.o(.text.LED_Off)
-    LED_On                                   0x08001561   Thumb Code    16  led.o(.text.LED_On)
+    LED_Toggle                               0x08001561   Thumb Code    16  led.o(.text.LED_Toggle)
     SysTick_Handler                          0x08001571   Thumb Code    16  systimer.o(.text.SysTick_Handler)
     SysTick_Init                             0x08001581   Thumb Code    78  systimer.o(.text.SysTick_Init)
     System_Clock_Init                        0x080015d1   Thumb Code   466  sysclock.o(.text.System_Clock_Init)
@@ -1234,7 +1234,7 @@ Memory Map of the image
     0x08001506   0x08001506   0x00000002   PAD
     0x08001508   0x08001508   0x00000048   Code   RO           23    .text.LED_Init      led.o
     0x08001550   0x08001550   0x00000010   Code   RO           25    .text.LED_Off       led.o
-    0x08001560   0x08001560   0x00000010   Code   RO           27    .text.LED_On        led.o
+    0x08001560   0x08001560   0x00000010   Code   RO           29    .text.LED_Toggle    led.o
     0x08001570   0x08001570   0x00000010   Code   RO           52    .text.SysTick_Handler  systimer.o
     0x08001580   0x08001580   0x0000004e   Code   RO           46    .text.SysTick_Init  systimer.o
     0x080015ce   0x080015ce   0x00000002   PAD

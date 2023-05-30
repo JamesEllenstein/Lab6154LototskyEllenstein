@@ -32,7 +32,7 @@ int main(void) {
 	
 	while(1) {
 		// toggle LED
-		LED_On();
+		LED_Toggle();
 		// Compute the CRC of DataBuffer
 		// start timer
 		startTimer();
